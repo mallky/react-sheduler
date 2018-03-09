@@ -1,0 +1,51 @@
+{
+  "name": "react-sheduler",
+  "version": "1.0.0",
+  "description": "some sheduler builded by react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "watch": "webpack --watch",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mallky/react-sheduler.git"
+  },
+  "keywords": [
+    "sheduler",
+    "react",
+    "redux",
+    "less"
+  ],
+  "author": "Makar Kuzmichev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mallky/react-sheduler/issues"
+  },
+  "homepage": "https://github.com/mallky/react-sheduler#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.10",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-loader": "^0.5.5",
+    "less": "^3.0.1",
+    "less-loader": "^4.0.6",
+    "my-local-ip": "^1.0.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0",
+    "webpack-merge": "^4.1.2"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "github:webpack-contrib/html-webpack-plugin"
+  }
+}
