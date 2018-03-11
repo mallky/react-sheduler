@@ -1,5 +1,7 @@
 import './App.less';
 import React from 'react';
+import ListWrap from './containers/ListWrap.jsx';
+import TextareaWrap from './containers/TextareaWrap.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -23,6 +25,8 @@ class App extends React.Component {
           this.state.color ? 'HELLO REACT!' : '1'
         }
       </em>
+      <ListWrap />
+      <TextareaWrap />
     </div>;
   }
 }
