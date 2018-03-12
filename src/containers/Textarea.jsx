@@ -1,9 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addToDo } from '../store/actions/actions';
 
+@connect()
 export default class Textarea extends React.Component {
   _onChange () {
-    this.props.onWriteText(this.textarea.value);
+    this.props.dispatch(addToDo(this.textarea.value));
   }
 
   render () {
@@ -18,7 +20,3 @@ export default class Textarea extends React.Component {
     </div>;
   }
 }
-
-Textarea.propTypes = {
-
-};

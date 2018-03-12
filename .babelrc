@@ -1,3 +1,12 @@
 {
-  "presets": ["es2017", "env", "react"]
+  "presets": [
+    "env",
+    "es2016",
+    "es2017",
+    "react"
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-decorators-legacy"
+  ]
 }

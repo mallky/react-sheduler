@@ -1,0 +1,14 @@
+/* TODOS CONSTS */
+
+const ADD_TODO = 'ADD_TODO';
+
+
+/* TODOS CONSTS */
+
+const OPEN_HOUR_MODAL = 'OPEN_HOUR_MODAL';
+
+
+export {
+  ADD_TODO,
+  OPEN_HOUR_MODAL
+};

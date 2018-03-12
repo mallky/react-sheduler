@@ -1,24 +1,10 @@
-import { ADD_TODO } from './../consts';
 import { combineReducers } from 'redux';
-
-const initialState = {
-  isEmpty: true,
-  text: 'hello'
-};
-
-const todos = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_TODO:
-      return Object.assign({}, state, {
-        text: action.text
-      });
-    default:
-      return state;
-  }
-};
+import todos from './todo';
+import application from './application';
 
 const todoApp = combineReducers({
-  todos
+  todos,
+  application
 });
 
 export default todoApp;

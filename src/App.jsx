@@ -1,7 +1,8 @@
 import './App.less';
 import React from 'react';
-import ListWrap from './containers/ListWrap.jsx';
-import TextareaWrap from './containers/TextareaWrap.jsx';
+import List from './containers/List.jsx';
+import Textarea from './containers/Textarea.jsx';
+import DayHour from './components/main/day/DayHour.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -25,8 +26,9 @@ class App extends React.Component {
           this.state.color ? 'HELLO REACT!' : '1'
         }
       </em>
-      <ListWrap />
-      <TextareaWrap />
+      <List />
+      <Textarea />
+      <DayHour hour="8"/>
     </div>;
   }
 }
