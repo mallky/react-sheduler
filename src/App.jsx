@@ -1,6 +1,6 @@
 import './App.less';
 import React from 'react';
-import DayHour from './components/main/day/DayHour.jsx';
+import Day from './components/main/day/Day.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -19,7 +19,7 @@ class App extends React.Component {
 
   render () {
     return <div>
-      <DayHour hour="8"/>
+      <Day />
     </div>;
   }
 }

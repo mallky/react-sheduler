@@ -2,14 +2,10 @@ import './DayHour.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toggleHourModal } from '../../../store/actions/actions';
-import HourModal from '../../common/hour-modal/HourModal.jsx';
+import { toggleHourModal } from '../../../../store/actions/actions';
+import HourModal from '../../../common/hour-modal/HourModal.jsx';
 
-const mapStateToProps = (state) => ({
-  todo: state.todos.todo
-});
-
-@connect(mapStateToProps)
+@connect()
 class DayHour extends React.Component {
   constructor (props) {
     super(props);
@@ -26,7 +22,7 @@ class DayHour extends React.Component {
         {this.props.hour}
       </div>
       <button className="todo" onClick={this._onClick.bind(this)}>
-        {this.props.todo.task || ''}
+        {this.props.task}
       </button>
       <HourModal />
     </div>
@@ -36,5 +32,6 @@ class DayHour extends React.Component {
 export default DayHour;
 
 DayHour.PropTypes = {
-  hour: PropTypes.string.isRequired
+  hour: PropTypes.string.isRequired,
+  task: PropTypes.string
 };
