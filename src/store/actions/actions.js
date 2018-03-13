@@ -2,9 +2,9 @@ import { ADD_TODO, OPEN_HOUR_MODAL } from '../types/consts';
 
 /* TODOS ACTIONS */
 
-export const addToDo = (text) => ({
+export const addToDo = (todo) => ({
   type: ADD_TODO,
-  text
+  todo
 });
 
 /* APPLICATION ACTIONS */

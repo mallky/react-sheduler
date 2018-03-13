@@ -5,7 +5,11 @@ import { connect } from 'react-redux';
 import { toggleHourModal } from '../../../store/actions/actions';
 import HourModal from '../../common/hour-modal/HourModal.jsx';
 
-@connect()
+const mapStateToProps = (state) => ({
+  todo: state.todos.todo
+});
+
+@connect(mapStateToProps)
 class DayHour extends React.Component {
   constructor (props) {
     super(props);
@@ -22,7 +26,7 @@ class DayHour extends React.Component {
         {this.props.hour}
       </div>
       <button className="todo" onClick={this._onClick.bind(this)}>
-        {this.props.task || ''}
+        {this.props.todo.task || ''}
       </button>
       <HourModal />
     </div>
@@ -32,6 +36,5 @@ class DayHour extends React.Component {
 export default DayHour;
 
 DayHour.PropTypes = {
-  hour: PropTypes.string.isRequired,
-  task: PropTypes.string
-}
+  hour: PropTypes.string.isRequired
+};

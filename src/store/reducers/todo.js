@@ -2,7 +2,7 @@ import { ADD_TODO } from './../types/consts';
 
 const initialState = {
   isEmpty: true,
-  text: 'hello'
+  todo: []
 };
 
 const todos = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const todos = (state = initialState, action) => {
     case ADD_TODO:
       return {
         ...state,
-        text: action.text
+        todo: action.todo
       };
     default:
       return state;

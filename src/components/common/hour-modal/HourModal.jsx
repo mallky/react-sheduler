@@ -1,7 +1,7 @@
 import './HourModal.less';
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleHourModal } from '../../../store/actions/actions';
+import { toggleHourModal, addToDo } from '../../../store/actions/actions';
 
 const mapStateToProps = (state) => ({
   openHourModal: state.application.openHourModal
@@ -15,6 +15,9 @@ class HourModal extends React.Component {
   }
 
   _onClick () {
+    const task = this.textarea.value;
+
+    this.props.dispatch(addToDo({task}));
     this.props.dispatch(toggleHourModal());
   }
 
@@ -37,7 +40,12 @@ class HourModal extends React.Component {
           </div>
           <div className="task">
             <div>Task</div>
-            <textarea name="task" id="task" cols="30" rows="10"></textarea>
+            <textarea
+              name="task"
+              id="task"
+              cols="30"
+              rows="10"
+              ref={(textarea) => this.textarea = textarea} />
           </div>
           <div>
             <button onClick={this._onClick.bind(this)}>OK</button>
