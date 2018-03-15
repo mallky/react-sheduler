@@ -7,6 +7,12 @@ import { DAY_HOURS } from '../../../common';
 
 @connect()
 class HourModal extends React.Component {
+  componentDidUpdate () {
+    if (this.textarea) {
+      this.textarea.focus();
+    }
+  }
+
   _onClick () {
     const text = this.textarea.value;
 

@@ -40,7 +40,7 @@ class DayHour extends React.Component {
       <div className="hour">
         {this.props.hour}
       </div>
-      <button className={`todo ${this.props.isDone ? 'done' : null}`} onClick={this._onClick.bind(this)}>
+      <button className={`todo ${this.props.isDone ? 'done' : ''}`} onClick={this._onClick.bind(this)}>
         {this.props.task}
       </button>
       <button disabled={disabled} onClick={this._onDelete.bind(this)}>delete</button>
