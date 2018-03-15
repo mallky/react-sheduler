@@ -1,12 +1,19 @@
 import './HourModal.less';
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as _ from 'lodash';
 import { connect } from 'react-redux';
 import { addToDo, switchToDoHour } from '../../../store/actions/actions';
-import { DAY_HOURS } from '../../../common';
+import { DAY_HOURS, KEY_CODES } from '../../../common';
 
 @connect()
 class HourModal extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {chosenHour: this.props.hour};
+  }
+
   componentDidUpdate () {
     if (this.textarea) {
       this.textarea.focus();
@@ -19,31 +26,57 @@ class HourModal extends React.Component {
     this.props.dispatch(addToDo({
       text,
       dayId: this.props.dayId,
-      hour: this.props.hour
+      hour: this.state.chosenHour
     }));
     this.props.onClick();
+
+    if (this.state.chosenHour !== this.props.hour) {
+      this.props.dispatch(switchToDoHour({
+        hour: this.props.hour,
+        switchHour: this.state.chosenHour
+      }));
+
+      this.setState({
+        chosenHour: this.props.hour
+      });
+    }
+  }
+
+  _reset () {
+    this.setState({
+      chosenHour: this.props.hour
+    });
+    this.props.onClick();
+  };
+
+  _onKeyPress(e) {
+    const code = e.keyCode;
+
+    code === KEY_CODES.ENTER ? this._onClick() : code === KEY_CODES.ESC && this._reset();
   }
 
   _chooseHour (e) {
     const switchHour = e.target.value;
-    const hour = this.props.hour;
-    const hours = {hour, switchHour};
-
-    this.props.dispatch(switchToDoHour(hours));
+    this.setState({
+      chosenHour: switchHour
+    });
   }
 
   renderOptions () {
-    return DAY_HOURS.map((hour, i) => {
-      return <option key={`${hour}-${i}`} disabled={hour === this.props.hour} value={hour}>{hour}</option>;
+    const newDayHours = _.uniq(DAY_HOURS);
+    newDayHours.unshift('');
+
+    return newDayHours.map((hour, i) => {
+      return <option key={`${hour}-${i}`} disabled={i !== 0 && hour === this.props.hour} value={i ? hour : this.props.hour}>{hour}</option>;
     });
   }
 
   render () {
-    return this.props.openModal ? <div className="hour-modal modal">
+    return this.props.openModal ? <div className="hour-modal modal" onKeyDown={this._onKeyPress.bind(this)}>
       <div className="overlay">
         <div className="modal-body">
           <div className="time">
-            <div>Time</div>
+            <div>Time switch</div>
             <div>
               <div>
                 <span>from</span>
