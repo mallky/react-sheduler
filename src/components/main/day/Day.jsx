@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { DAY_HOURS } from '../../../common';
 
 const mapStateToProps = (state) => ({
-  todo: state.todos.todo
+  allTodo: state.todos.allTodo
 });
 
 @connect(mapStateToProps)
@@ -15,10 +15,11 @@ class Day extends React.Component {
   }
 
   renderDay () {
-    const task = this.props.todo ? this.props.todo.task : '';
+    return DAY_HOURS.map((dayHour, i) => {
+      const task = this.props.allTodo[dayHour] ? this.props.allTodo[dayHour].text : '';
+      const isDone = this.props.allTodo[dayHour] ? this.props.allTodo[dayHour].done : false;
 
-    return DAY_HOURS.map((hour, i) => {
-      return <DayHour key={i} task={task} hour={`${hour}`}/>
+      return <DayHour key={i} task={task} hour={`${dayHour}`} isDone={isDone}/>
     });
   }
 

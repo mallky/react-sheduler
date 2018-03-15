@@ -1,28 +1,39 @@
 import './HourModal.less';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toggleHourModal, addToDo } from '../../../store/actions/actions';
+import { addToDo, switchToDoHour } from '../../../store/actions/actions';
+import { DAY_HOURS } from '../../../common';
 
-const mapStateToProps = (state) => ({
-  openHourModal: state.application.openHourModal
-});
-
-@connect(mapStateToProps)
+@connect()
 class HourModal extends React.Component {
-  constructor (props) {
-    super(props);
+  _onClick () {
+    const text = this.textarea.value;
 
+    this.props.dispatch(addToDo({
+      text,
+      dayId: this.props.dayId,
+      hour: this.props.hour
+    }));
+    this.props.onClick();
   }
 
-  _onClick () {
-    const task = this.textarea.value;
+  _chooseHour (e) {
+    const switchHour = e.target.value;
+    const hour = this.props.hour;
+    const hours = {hour, switchHour};
 
-    this.props.dispatch(addToDo({task}));
-    this.props.dispatch(toggleHourModal());
+    this.props.dispatch(switchToDoHour(hours));
+  }
+
+  renderOptions () {
+    return DAY_HOURS.map((hour, i) => {
+      return <option key={`${hour}-${i}`} disabled={hour === this.props.hour} value={hour}>{hour}</option>;
+    });
   }
 
   render () {
-    return this.props.openHourModal ? <div className="hour-modal modal">
+    return this.props.openModal ? <div className="hour-modal modal">
       <div className="overlay">
         <div className="modal-body">
           <div className="time">
@@ -30,11 +41,13 @@ class HourModal extends React.Component {
             <div>
               <div>
                 <span>from</span>
-                <input type="text"/>
+                {this.props.hour}
               </div>
               <div>
                 <span>to</span>
-                <input type="text"/>
+                <select onChange={this._chooseHour.bind(this)}>
+                  {this.renderOptions()}
+                </select>
               </div>
             </div>
           </div>
@@ -45,6 +58,7 @@ class HourModal extends React.Component {
               id="task"
               cols="30"
               rows="10"
+              defaultValue={this.props.task}
               ref={(textarea) => this.textarea = textarea} />
           </div>
           <div>
@@ -57,3 +71,11 @@ class HourModal extends React.Component {
 }
 
 export default HourModal;
+
+HourModal.PropTypes = {
+  hour: PropTypes.string.isRequired,
+  task: PropTypes.string.isRequired,
+  dayId: PropTypes.string.isRequired,
+  openModal: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired
+};
