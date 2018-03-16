@@ -1,6 +1,6 @@
 import './App.less';
 import React from 'react';
-import Day from './components/main/day/Day.jsx';
+import Week from './components/main/week/Week.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -19,7 +19,7 @@ class App extends React.Component {
 
   render () {
     return <div>
-      <Day />
+      <Week />
     </div>;
   }
 }

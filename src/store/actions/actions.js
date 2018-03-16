@@ -7,14 +7,14 @@ export const addToDo = (todoData) => ({
   todoData
 });
 
-export const deleteToDo = (hour) => ({
+export const deleteToDo = (data) => ({
   type: DELETE_TODO,
-  hour
+  data
 });
 
-export const doneToDo = (hour) => ({
+export const doneToDo = (data) => ({
   type: DONE_TODO,
-  hour
+  data
 });
 
 export const switchToDoHour = (hours) => ({

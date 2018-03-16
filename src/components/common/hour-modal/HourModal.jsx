@@ -33,6 +33,7 @@ class HourModal extends React.Component {
     if (this.state.chosenHour !== this.props.hour) {
       this.props.dispatch(switchToDoHour({
         hour: this.props.hour,
+        dayId: this.props.dayId,
         switchHour: this.state.chosenHour
       }));
 
@@ -67,7 +68,10 @@ class HourModal extends React.Component {
     newDayHours.unshift('');
 
     return newDayHours.map((hour, i) => {
-      return <option key={`${hour}-${i}`} disabled={i !== 0 && hour === this.props.hour} value={i ? hour : this.props.hour}>{hour}</option>;
+      return <option
+        key={`${hour}-${i}`}
+        disabled={i !== 0 && hour === this.props.hour}
+        value={i ? hour : this.props.hour}>{hour}</option>;
     });
   }
 

@@ -16,22 +16,22 @@ const todos = (state = initialState, action) => {
       if (text === '') {
         return state;
       }
-
-      newState.allTodo[hour] = {
+      newState.allTodo[dayId] = newState.allTodo[dayId] || {};
+      newState.allTodo[dayId][hour] = {
         text,
         done: false
       };
       return newState;
     case DELETE_TODO:
-      newState.allTodo = _.omit(newState.allTodo, action.hour);
+      newState.allTodo[action.data.dayId] = _.omit(newState.allTodo[action.data.dayId], action.data.hour);
       return newState;
     case DONE_TODO:
-      newState.allTodo[action.hour].done = !newState.allTodo[action.hour].done;
+      newState.allTodo[action.data.dayId][action.data.hour].done = !newState.allTodo[action.data.dayId][action.data.hour].done;
       return newState;
     case SWITCH_TODO_HOUR:
-      if (newState.allTodo[action.hours.hour]) {
-        newState.allTodo[action.hours.switchHour] = newState.allTodo[action.hours.hour];
-        newState.allTodo = _.omit(newState.allTodo, action.hours.hour);
+      if (newState.allTodo[action.hours.dayId] && newState.allTodo[action.hours.dayId][action.hours.hour]) {
+        newState.allTodo[action.hours.dayId][action.hours.switchHour] = newState.allTodo[action.hours.dayId][action.hours.hour];
+        newState.allTodo[action.hours.dayId] = _.omit(newState.allTodo[action.hours.dayId], action.hours.hour);
       }
       return newState;
     default:

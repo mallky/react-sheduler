@@ -22,11 +22,17 @@ class DayHour extends React.Component {
   }
 
   _onDelete () {
-    this.props.dispatch(deleteToDo(this.props.hour));
+    this.props.dispatch(deleteToDo({
+      hour: this.props.hour,
+      dayId: this.props.dayId
+    }));
   }
 
   _onDone () {
-    this.props.dispatch(doneToDo(this.props.hour));
+    this.props.dispatch(doneToDo({
+      hour: this.props.hour,
+      dayId: this.props.dayId
+    }));
   }
 
   _onOK () {
@@ -40,7 +46,7 @@ class DayHour extends React.Component {
       <div className="hour">
         {this.props.hour}
       </div>
-      <button className={`todo ${this.props.isDone ? 'done' : ''}`} onClick={this._onClick.bind(this)}>
+      <button disabled={this.props.isPast} className={`todo ${this.props.isDone ? 'done' : ''}`} onClick={this._onClick.bind(this)}>
         {this.props.task}
       </button>
       <button disabled={disabled} onClick={this._onDelete.bind(this)}>delete</button>
@@ -48,7 +54,7 @@ class DayHour extends React.Component {
       <HourModal
         hour={this.props.hour}
         task={this.props.task}
-        dayId='today'
+        dayId={this.props.dayId}
         openModal={this.state.openModal}
         onClick={this._onOK.bind(this)}/>
     </div>
@@ -59,6 +65,8 @@ export default DayHour;
 
 DayHour.PropTypes = {
   hour: PropTypes.string.isRequired,
+  dayId: PropTypes.string.isRequired,
   isDone: PropTypes.bool.isRequired,
-  task: PropTypes.string
+  task: PropTypes.string,
+  isPast: PropTypes.bool
 };
