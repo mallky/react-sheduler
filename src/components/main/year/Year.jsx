@@ -3,8 +3,10 @@ import React from 'react';
 
 class Year extends React.Component {
   render () {
-    return <div>
-      Year
+    return <div className="year">
+      <div className="header">
+        In progress
+      </div>
     </div>;
   }
 }

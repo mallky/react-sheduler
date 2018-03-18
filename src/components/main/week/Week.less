@@ -1,5 +1,11 @@
+@import "../../../styles/common.less";
+
 .week {
   text-align: center;
+
+  & > .head {
+    .header();
+  }
 
   .days {
     display: flex;

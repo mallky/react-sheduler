@@ -33,7 +33,7 @@ class App extends React.Component {
           <Route exact path="/" component={Home}/>
           <Route path="/week" component={Week}/>
           <Route path="/month" component={Month}/>
-          <Route path="/day" component={Day}/>
+          <Route path="/custom-task" component={Day}/>
           <Route path="/year" component={Year}/>
         </Switch>
       </div>

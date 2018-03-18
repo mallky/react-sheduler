@@ -3,8 +3,10 @@ import React from 'react';
 
 class Month extends React.Component {
   render () {
-    return <div>
-      Month
+    return <div className="month">
+      <div className="header">
+        In progress
+      </div>
     </div>;
   }
 }
