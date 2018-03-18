@@ -1,5 +1,6 @@
 import './HourModal.less';
 import React from 'react';
+import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
@@ -13,8 +14,19 @@ class HourModal extends React.Component {
 
     this.state = {chosenHour: this.props.hour};
   }
+  
+  componentWillMount () {
+    this.modalRoot = document.createElement('div');
+    this.modalRoot.classList.add('modal-root');
 
-  componentDidUpdate () {
+    document.body.appendChild(this.modalRoot);
+  }
+  
+  componentWillUnmount () {
+    document.body.removeChild(this.modalRoot);
+  }
+
+  componentDidMount () {
     if (this.textarea) {
       this.textarea.focus();
     }
@@ -76,7 +88,7 @@ class HourModal extends React.Component {
   }
 
   render () {
-    return this.props.openModal ? <div className="hour-modal modal" onKeyDown={this._onKeyPress.bind(this)}>
+    return ReactDom.createPortal(<div className="hour-modal modal" onKeyDown={this._onKeyPress.bind(this)}>
       <div className="overlay">
         <div className="modal-body">
           <div className="time">
@@ -109,7 +121,7 @@ class HourModal extends React.Component {
           </div>
         </div>
       </div>
-    </div> : null;
+    </div>, this.modalRoot);
   }
 }
 
@@ -119,6 +131,5 @@ HourModal.PropTypes = {
   hour: PropTypes.string.isRequired,
   task: PropTypes.string.isRequired,
   dayId: PropTypes.string.isRequired,
-  openModal: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired
 };

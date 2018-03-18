@@ -51,12 +51,11 @@ class DayHour extends React.Component {
       </button>
       <button disabled={disabled} onClick={this._onDelete.bind(this)}>delete</button>
       <button disabled={disabled} onClick={this._onDone.bind(this)}>done</button>
-      <HourModal
-        hour={this.props.hour}
+      {this.state.openModal && <HourModal 
+        hour={this.props.hour} 
         task={this.props.task}
         dayId={this.props.dayId}
-        openModal={this.state.openModal}
-        onClick={this._onOK.bind(this)}/>
+        onClick={this._onOK.bind(this)}/>}
     </div>
   }
 }
