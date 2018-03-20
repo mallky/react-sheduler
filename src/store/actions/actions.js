@@ -1,29 +1,41 @@
-import { ADD_TODO, OPEN_HOUR_MODAL, DELETE_TODO, DONE_TODO, SWITCH_TODO_HOUR } from '../types/consts';
+import * as types from "../types/consts";
 
 /* TODOS ACTIONS */
 
 export const addToDo = (todoData) => ({
-  type: ADD_TODO,
+  type: types.ADD_TODO,
   todoData
 });
 
 export const deleteToDo = (data) => ({
-  type: DELETE_TODO,
+  type: types.DELETE_TODO,
   data
 });
 
 export const doneToDo = (data) => ({
-  type: DONE_TODO,
+  type: types.DONE_TODO,
   data
 });
 
 export const switchToDoHour = (hours) => ({
-  type: SWITCH_TODO_HOUR,
+  type: types.SWITCH_TODO_HOUR,
   hours
 });
 
-/* APPLICATION ACTIONS */
+/* Custom todos ACTIONS */
 
-export const toggleHourModal = () => ({
-  type: OPEN_HOUR_MODAL
+
+export const customAddToDo = (todoData) => ({
+  type: types.CUSTOM_ADD_TODO,
+  todoData
+});
+
+export const customDeleteToDo = (num) => ({
+  type: types.CUSTOM_DELETE_TODO,
+  num
+});
+
+export const customDoneToDo = (num) => ({
+  type: types.CUSTOM_DONE_TODO,
+  num
 });

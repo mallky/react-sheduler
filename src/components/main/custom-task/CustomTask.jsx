@@ -1,30 +1,33 @@
 import "./CustomTask.less";
 import React from "react";
 import {KEY_CODES} from "../../../common";
+import {connect} from "react-redux";
+import {customAddToDo, customDoneToDo, customDeleteToDo} from "../../../store/actions/actions";
 
+const mapStateToProps = (state) => ({
+  customTODO: state.todos.customTODO
+});
+
+@connect(mapStateToProps)
 class CustomTask extends React.Component {
   constructor (props) {
     super(props);
 
-    this.tasksArray = [];
-    this.lis = [];
-
     this.state = {
-      writeTask: true,
-      tasks: []
+      writeTask: true
     };
   }
 
   _onEnter (e) {
     if (e.keyCode === KEY_CODES.ENTER) {
-      this.tasksArray.push(e.target.value);
-
       this.setState({
-        writeTask: true,
-        tasks: this.tasksArray
+        writeTask: true
       });
-    }
 
+      this.props.dispatch(customAddToDo({
+        task: e.target.value
+      }))
+    }
   }
   
   _onClick () {
@@ -32,31 +35,39 @@ class CustomTask extends React.Component {
   }
 
   _taskDone (i) {
-    if (!this.lis[i].getAttribute('style')) {
-      this.lis[i].style.textDecoration = 'line-through';
-    } else {
-      this.lis[i].removeAttribute('style');
-    }
+    this.props.dispatch(customDoneToDo(i))
+  }
+
+  _onDelete (i) {
+    this.props.dispatch(customDeleteToDo(i))
   }
 
   renderTasks () {
-    return this.state.tasks.map((task, i) => {
-      return <li key={`task-${i}`} onClick={this._taskDone.bind(this, i)} ref={(li => this.lis[i] = li)}>{task}</li>;
+    return this.props.customTODO.map((task, i) => {
+      const isDone = task.done ? 'done' : 'default';
+      return <li
+        key={`task-${i}`}
+        className={isDone}>
+        {[
+          task.task,
+          <button key={`button-del-${i}`} onClick={this._onDelete.bind(this, i)}>delete</button>,
+          <button key={`button-done-${i}`} onClick={this._taskDone.bind(this, i)}>done</button>]}
+      </li>;
     });
   }
 
   render () {
-    return <div className="custom-task">
-      <div className="head">
+    return <div className='custom-task'>
+      <div className='head'>
         Split Task to SubTasks
       </div>
-      <div className="body">
+      <div className='body'>
         <ol>
           {this.renderTasks()}
           <li>
             {this.state.writeTask
               ? <button onClick={this._onClick.bind(this)}>Write Task</button>
-              : <input type="text" onKeyDown={this._onEnter.bind(this)}/>}
+              : <input type='text' onKeyDown={this._onEnter.bind(this)}/>}
           </li>
         </ol>
       </div>
