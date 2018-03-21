@@ -1,8 +1,8 @@
 import "./CustomTask.less";
 import React from "react";
-import {KEY_CODES} from "../../../common";
+import {KEY_CODES} from "../../../../common";
 import {connect} from "react-redux";
-import {customAddToDo, customDoneToDo, customDeleteToDo} from "../../../store/actions/actions";
+import {customAddToDo, customDoneToDo, customDeleteToDo} from "../../../../store/actions/actions";
 
 const mapStateToProps = (state) => ({
   customTODO: state.todos.customTODO

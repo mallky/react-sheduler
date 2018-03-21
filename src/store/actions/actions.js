@@ -39,3 +39,7 @@ export const customDoneToDo = (num) => ({
   type: types.CUSTOM_DONE_TODO,
   num
 });
+
+export const customResetTODO = () => ({
+  type: types.CUSTOM_RESET_TODO
+});

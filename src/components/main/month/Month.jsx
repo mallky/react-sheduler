@@ -1,14 +1,35 @@
-import './Month.less';
-import React from 'react';
+import "./Month.less";
+import React from "react";
+import PropTypes from "prop-types";
+import CollapseBlock from "../../common/collapse-block/CollapseBlock.jsx";
+import {dateWork} from "../../../common";
 
 class Month extends React.Component {
+  renderHead (name) {
+    return <div className="header">
+      {name}
+    </div>;
+  }
+
+  renderBody (name) {
+    return [<div key="boyd-1" className="header">
+      {name }
+    </div>];
+  }
+
   render () {
+    const name = this.props.name || dateWork().month;
+
     return <div className="month">
-      <div className="header">
-        In progress
-      </div>
+      <CollapseBlock
+        collapseHead={this.renderHead(name)}
+        collapseBody={this.renderBody(name)}/>
     </div>;
   }
 }
 
 export default Month;
+
+Month.propTypes = {
+  name: PropTypes.string
+};

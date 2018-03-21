@@ -3,7 +3,7 @@ import * as types from "./../types/consts";
 
 const initialState = {
   isEmpty: true,
-  allTodo: {},
+  weekTodo: {},
   customTODO: []
 };
 
@@ -17,22 +17,22 @@ const todos = (state = initialState, action) => {
       if (text === '') {
         return state;
       }
-      newState.allTodo[dayId] = newState.allTodo[dayId] || {};
-      newState.allTodo[dayId][hour] = {
+      newState.weekTodo[dayId] = newState.weekTodo[dayId] || {};
+      newState.weekTodo[dayId][hour] = {
         text,
         done: false
       };
       return newState;
     case types.DELETE_TODO:
-      newState.allTodo[action.data.dayId] = _.omit(newState.allTodo[action.data.dayId], action.data.hour);
+      newState.weekTodo[action.data.dayId] = _.omit(newState.weekTodo[action.data.dayId], action.data.hour);
       return newState;
     case types.DONE_TODO:
-      newState.allTodo[action.data.dayId][action.data.hour].done = !newState.allTodo[action.data.dayId][action.data.hour].done;
+      newState.weekTodo[action.data.dayId][action.data.hour].done = !newState.weekTodo[action.data.dayId][action.data.hour].done;
       return newState;
     case types.SWITCH_TODO_HOUR:
-      if (newState.allTodo[action.hours.dayId] && newState.allTodo[action.hours.dayId][action.hours.hour]) {
-        newState.allTodo[action.hours.dayId][action.hours.switchHour] = newState.allTodo[action.hours.dayId][action.hours.hour];
-        newState.allTodo[action.hours.dayId] = _.omit(newState.allTodo[action.hours.dayId], action.hours.hour);
+      if (newState.weekTodo[action.hours.dayId] && newState.weekTodo[action.hours.dayId][action.hours.hour]) {
+        newState.weekTodo[action.hours.dayId][action.hours.switchHour] = newState.weekTodo[action.hours.dayId][action.hours.hour];
+        newState.weekTodo[action.hours.dayId] = _.omit(newState.weekTodo[action.hours.dayId], action.hours.hour);
       }
       return newState;
 
@@ -42,6 +42,7 @@ const todos = (state = initialState, action) => {
       }
       newState.customTODO.push({
         task: action.todoData.task,
+        id: action.todoData.id,
         done: false
       });
       return newState;
@@ -50,6 +51,9 @@ const todos = (state = initialState, action) => {
       return newState;
     case types.CUSTOM_DELETE_TODO:
       _.remove(newState.customTODO, newState.customTODO[action.num]);
+      return newState;
+    case types.CUSTOM_RESET_TODO:
+      newState.customTODO = [];
       return newState;
     default:
       return state;
