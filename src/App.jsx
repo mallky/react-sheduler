@@ -18,7 +18,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route path="/week" component={Week}/>
-          <Route path="/month" component={Month}/>
+          <Route path="/current-month" component={Month}/>
           <Route path="/custom-task" component={CustomTasks}/>
           <Route path="/year" component={Year}/>
         </Switch>

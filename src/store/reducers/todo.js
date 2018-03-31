@@ -11,6 +11,7 @@ const todos = (state = initialState, action) => {
   const newState = _.cloneDeep(state);
 
   switch (action.type) {
+    // For Week
     case types.ADD_TODO:
       const {text, dayId, hour} = action.todoData;
 
@@ -35,14 +36,14 @@ const todos = (state = initialState, action) => {
         newState.weekTodo[action.hours.dayId] = _.omit(newState.weekTodo[action.hours.dayId], action.hours.hour);
       }
       return newState;
-
+    // For Custom Task
     case types.CUSTOM_ADD_TODO:
       if (action.todoData.task === '') {
         return state;
       }
       newState.customTODO.push({
         task: action.todoData.task,
-        id: action.todoData.id,
+        taskId: action.todoData.taskId,
         done: false
       });
       return newState;

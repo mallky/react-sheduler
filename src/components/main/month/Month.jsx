@@ -2,7 +2,8 @@ import "./Month.less";
 import React from "react";
 import PropTypes from "prop-types";
 import CollapseBlock from "../../common/collapse-block/CollapseBlock.jsx";
-import {dateWork} from "../../../common";
+import CustomTasks from "../custom-tasks/CustomTasks.jsx";
+import { dateWork } from "../../../common";
 
 class Month extends React.Component {
   renderHead (name) {
@@ -13,7 +14,7 @@ class Month extends React.Component {
 
   renderBody (name) {
     return [<div key="boyd-1" className="header">
-      {name }
+      <CustomTasks head={name}/>
     </div>];
   }
 

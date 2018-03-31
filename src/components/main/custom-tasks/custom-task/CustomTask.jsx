@@ -1,5 +1,6 @@
 import "./CustomTask.less";
 import React from "react";
+import PropTypes from "prop-types";
 import {KEY_CODES} from "../../../../common";
 import {connect} from "react-redux";
 import {customAddToDo, customDoneToDo, customDeleteToDo} from "../../../../store/actions/actions";
@@ -25,7 +26,8 @@ class CustomTask extends React.Component {
       });
 
       this.props.dispatch(customAddToDo({
-        task: e.target.value
+        task: e.target.value,
+        taskId: `${this.props.head}-custom` || 'custom' 
       }))
     }
   }
@@ -59,7 +61,7 @@ class CustomTask extends React.Component {
   render () {
     return <div className='custom-task'>
       <div className='head'>
-        Split Task to SubTasks
+        {this.props.head ? this.props.head : 'Split Task to SubTasks'}
       </div>
       <div className='body'>
         <ol>
@@ -76,3 +78,7 @@ class CustomTask extends React.Component {
 }
 
 export default CustomTask;
+
+CustomTask.propTypes = {
+  head: PropTypes.string
+}
